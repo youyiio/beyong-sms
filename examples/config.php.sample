@@ -1,0 +1,17 @@
+<?php
+
+
+/**
+ * 示例配置文件
+ *
+ * 可以配置在 sms.php 或 config.php 文件中,
+ */
+return [
+    'driver'      => 'jiguang', // 服务提供商, 支持 aliyun|tencent|jiguan 三种
+    'key'         => '8d7a5122e74996d4467b8942', // 短信服务key
+    'secret'      => '8eacc3c752ca1aa38754bab1', // 短信服务secret
+
+    'debug' => true,
+    'log_driver' => '', //\beyong\sms\log\File::class,
+    'log_path' => __DIR__ . '/log'
+];
