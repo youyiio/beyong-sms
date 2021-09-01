@@ -157,7 +157,7 @@ class SmsClient
     }
 
     /**
-     * 短信内容，设置短信模板
+     * 短信内容，设置短信内容模板
      *
      * @param string $subject
      *
@@ -166,20 +166,6 @@ class SmsClient
     public function subject($subject, $param=[])
     {
         //$this->driver->withTemplate($template)->params($param);
-
-        return $this;
-    }
-
-    /**
-     * 添加附件
-     *
-     * @param string               $filePath
-     * @param string|\Closure|null $attr
-     *
-     * @return $this
-     */
-    public function attach($filePath, $attr = null)
-    {
 
         return $this;
     }
