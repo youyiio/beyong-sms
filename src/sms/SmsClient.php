@@ -129,6 +129,20 @@ class SmsClient
     }
 
     /**
+     * 设置短信签名
+     *
+     * @param  string|array $mobile
+     *
+     * @return $this
+     */
+    public function sign($sign)
+    {
+        $this->driver->sign($sign);
+
+        return $this;
+    }
+
+    /**
      * 短信内容，设置短信模板
      *
      * @param string $template

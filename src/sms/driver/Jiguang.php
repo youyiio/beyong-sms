@@ -7,7 +7,7 @@ use beyong\sms\log\Log;
 
 class Jiguang extends Driver
 {
-    protected $host = 'https://api.sms.jpush.cn/v1/codes';
+    protected $host = 'https://api.sms.jpush.cn/v1/messages';
 
     protected $base_host = 'https://api.sms.jpush.cn/v1/';
 

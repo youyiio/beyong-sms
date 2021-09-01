@@ -70,9 +70,9 @@ return [
     'key'         => '', // 短信服务key
     'secret'      => '', // 短信服务secret
 
-    'debug' => true,
-    'log_driver' => 'file',
-    'log_path' => ''
+    'debug'      => true,
+    'log_driver' => '', //\beyong\sms\log\File::class,
+    'log_path'   => __DIR__ . '/log'
 ];
 ```
 ### 部分配置详解
