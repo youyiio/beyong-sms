@@ -3,15 +3,19 @@
 //项目目录下，执行 php examples\aliyun_send_sms.php
 require __DIR__ . '/../vendor/autoload.php';
 
-\beyong\sms\Config::init(include(__DIR__ . '/config.php'));
+//$smsConfig = include(__DIR__ . '/config.php');
+$smsConfig = include(__DIR__ . '/config_aliyun.php');
+\beyong\sms\Config::init($smsConfig);
 
 $smsClient = \beyong\sms\SmsClient::instance();
 
-# 这里的 $temp_id 和 $temp_para 的值需要到 "极光控制台 -> 短信验证码 -> 模板管理" 里面获取
-$temp_id = '1';
-$temp_para = [];
-$sign = '';
+# 这里的 $template 和 $params 的值需要到 "阿里云控制台 -> 短信功能 -> 国内消息 -> 模板管理" 里面获取
+$sign = $smsConfig["actions"]["register"]["sign"];
+$template = $smsConfig["actions"]["register"]["template"];
+$params = ["code" => "123456"];
 
-$response = $smsClient->to('xxxx')->template($temp_id, $temp_para)->send();
+$mobile = '';
+
+$response = $smsClient->sign($sign)->to($mobile)->template($template, $params)->send();
 
 print_r($response);

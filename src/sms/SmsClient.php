@@ -103,7 +103,11 @@ class SmsClient
                 $this->driver = new Aliyun(Config::get("key"), Config::get("secret"));
                 break;
             case "tencent":
+                if (empty(Config::get("SDKAppID"))) {
+                    throw new \Exception("'SDKAppID' key is needed in config.php by tencent sms! 腾讯配置很特殊!");
+                }
                 $this->driver = new Tencent(Config::get("key"), Config::get("secret"));
+                $this->driver->setAppid(Config::get("SDKAppID"));
                 break;
             case "jiguang":
             case "jpush":
@@ -199,23 +203,13 @@ class SmsClient
     }
 
     /**
-     * 获取头信息
+     * 获取响应信息
      *
-     * @return \Swift_Mime_HeaderSet
+     * @return 
      */
-    public function getHeaders()
+    public function getResponse()
     {
-        return $this->driver->getHeaders();
-    }
-
-    /**
-     * 获取头信息 (字符串)
-     *
-     * @return string
-     */
-    public function getHeadersString()
-    {
-        return $this->getHeaders()->toString();
+        return $this->driver->getResponse();
     }
 
     /**
@@ -233,8 +227,8 @@ class SmsClient
 
             // 将错误信息记录在日志中
             $log = "Error: " . $this->errMsg . "\n"
-                . '邮件头信息：' . "\n"
-                . var_export($this->getHeadersString(), true);
+                . '响应信息：' . "\n"
+                . var_export($this->getResponse(), true);
             Log::write($log, Log::ERROR);
 
             // 异常处理

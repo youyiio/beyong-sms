@@ -126,11 +126,17 @@ class Jiguang extends Driver
      */
     protected function handleResponse($response)
     {
-        return [
+        $result = [
             'status' => isset($response['msg_id']), 
             'code' => isset($response['msg_id']) ? 1 : $response['error']['code'], 
             'message' => isset($response['msg_id']) ? 'success' : $response['error']['message']
         ];
+
+        if ($result['status'] !== true) {
+            throw new \Exception($result["message"]);
+        }
+
+        return $result;
     }
 
     /**
@@ -170,10 +176,11 @@ class Jiguang extends Driver
         $response = curl_exec($ch);
         curl_close($ch);
 
+        $this->response = $response;
         Log::write($response);
 		
         $response = $this->handleResponse(json_decode($response, true));
-        $this->response = $response;
+        
         return $response['status'];
     }
 }

@@ -53,7 +53,7 @@ abstract class Driver
 	 *
 	 * @var array
 	 */
-	private $response;
+	protected $response;
 
 	/**
 	 * 构造函数
@@ -168,10 +168,11 @@ abstract class Driver
         $response = curl_exec($ch);
         curl_close($ch);
 
+		$this->response = $response;
 		Log::write($response);
 
         $response = $this->handleResponse(json_decode($response, true));
-        $this->response = $response;
+        
         return $response['status'];
     }
 

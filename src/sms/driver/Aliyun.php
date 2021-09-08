@@ -119,7 +119,16 @@ class Aliyun extends Driver
      */
     protected function handleResponse($response)
     {
-        return ['status' => $response['Code'] == 'OK', 'code' => $response['Code'], 'message' => $response['Message']];
+        $result = [
+            'status' => $response['Code'] == 'OK', 
+            'code' => $response['Code'], 
+            'message' => $response['Message']
+        ];
+        if ($result['status'] !== true) {
+            throw new \Exception($result["message"]);
+        }
+
+        return $result;
     }
 
     /**
