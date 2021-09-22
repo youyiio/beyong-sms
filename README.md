@@ -4,6 +4,7 @@
 
 基于 阿里云、腾讯云、极光最新短信发送功能的极简包 二次开发, 为ThinkPHP系列框架量身定制, 使 ThinkPHP 支持短信模板、纯文本发送以及更多短信功能, 短信发送简单到只需一行代码
 
+[github地址](https://github.com/youyiio/beyong-sms)
 
 ## 目录 
 * [优雅的发送短信](#优雅的发送短信) 
@@ -20,8 +21,8 @@
     * [设置收件人](#设置收件人)
     * [设置发件人](#设置发件人)
     * [设置短信主题](#设置短信主题)
-    * [设置短信内容 - HTML](#设置短信内容---html)
-    * [设置短信内容 - 纯文本](#设置短信内容---纯文本)
+    * [设置短信内容 - template](#设置短信内容-template)
+    * [设置短信内容](#设置短信内容)
     * [发送短信](#发送短信)
 * [Issues](#issues)
 * [License](#license)
@@ -69,7 +70,7 @@ return [
     'driver'      => 'aliyun', // 服务提供商, 支持 aliyun|tencent|jiguang 三种
     'key'         => '', // 短信服务key
     'secret'      => '', // 短信服务secret
-
+    'SDKAppID'    => '', // 腾讯短信平台需要
     'debug'      => true,
     'log_driver' => '', //\beyong\sms\log\File::class,
     'log_path'   => __DIR__ . '/log'
@@ -121,7 +122,7 @@ $client->to(['177xxxx', '132xxxx']);
 
 ```
 
-### 设置短信内容 - template
+### 设置短信内容-template
 ```
 $client->template('欢迎使用beyong-sms');
 ```
